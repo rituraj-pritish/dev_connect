@@ -1,0 +1,28 @@
+{
+  "name": "dev-connect",
+  "version": "1.0.0",
+  "description": "social media for developers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run client\" \"npm run server\" "
+  },
+  "author": "RP",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.19.2"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "chalk": "^2.4.2",
+    "cookie-session": "^1.3.3",
+    "express": "^4.17.1",
+    "mongoose": "^5.7.1",
+    "passport": "^0.4.0",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-local": "^1.0.0"
+  }
+}
