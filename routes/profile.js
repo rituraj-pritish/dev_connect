@@ -48,4 +48,9 @@ router.put('/education',ProfilesController.updateEducation)
 //@access     Private
 router.delete('/education/:edu_id',ProfilesController.deleteEducation)
 
+//@route      GET /profile/github/:username
+//@desc       get user repos from hithub 
+//@access     Public
+router.get('/github/:username',ProfilesController.getRepos)
+
 module.exports = router;
