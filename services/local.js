@@ -1,5 +1,5 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 const chalk = require('chalk');
 const bcrypt = require('bcryptjs');
 
@@ -11,7 +11,7 @@ passport.use(
       usernameField: 'email',
       passwordField: 'password'
     },
-    async (email, password) => {
+    async (email, password, done) => {
       try {
         const user = await User.findOne({
           'local.email': email
@@ -35,9 +35,10 @@ passport.use(
         }
 
         console.log(chalk.green('success'));
-        return user;
+
+        return done(null, user);
       } catch (error) {
-        console.log(chalk.red(error.message));
+        console.log(chalk.red(error));
       }
     }
   )

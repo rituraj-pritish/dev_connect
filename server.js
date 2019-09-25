@@ -20,7 +20,8 @@ app.use(
   })
 );
 
-app.use('/users', require('./routes/users'));
+app.use('/user', require('./routes/user'));
+app.use('/profile', require('./routes/profile'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);

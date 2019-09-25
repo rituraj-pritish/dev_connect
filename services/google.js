@@ -8,13 +8,14 @@ passport.use(
     {
       clientID: keys.googleClientId,
       clientSecret: keys.googleSecret,
-      callbackURL: '/users/google/callback'
+      callbackURL: '/user/google/callback'
     },
     async (accessToken, refreshToken, profile, done) => {
       console.log(chalk.blue(JSON.stringify(profile)));
+      
       try {
         const existingUser = await User.findOne({
-          googleId: profile.id
+          'google.id': profile.id
         });
 
         if (existingUser) {
@@ -27,9 +28,8 @@ passport.use(
             id: profile.id,
             email: profile.email
           },
-          name: profile.displayName,
+          name: profile.displayName
         }).save();
-
         return done(null, user);
       } catch (error) {
         console.error(chalk.red(error.message));
