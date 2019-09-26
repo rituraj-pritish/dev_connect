@@ -1,32 +1,46 @@
-import React, { Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
+import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'materialize-css/dist/css/materialize.min.css';
-import M from 'materialize-css/dist/js/materialize.min.js';
-import './App.css'
+import './App.css';
 import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import Developers from './components/Developers';
 import Landing from './components/Landing';
+import CustomAlert from './components/CustomAlert';
+import Dashboard from './components/Dashboard';
+import PrivateRoute from './components/PrivateRoute';
 
-function App() {
+import { fetchUser } from './actions/auth';
+
+const App = ({ fetchUser }) => {
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   return (
     <Router>
-      <Fragment >
+      <Fragment>
         <Navbar />
         <div className='container'>
           <Switch>
-            <Route path='/user/register' component={Register} />
-            <Route path='/user/login' component={Login} />
-            <Route path='/users' component={Developers} />
-            <Route path='/' component={Landing} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/users' component={Developers} />
+            <Route exact path='/' component={Landing} />
+            <PrivateRoute exact path='/dashboard' component={Dashboard} />
           </Switch>
         </div>
+        <CustomAlert />
       </Fragment>
     </Router>
   );
-}
+};
 
-export default App;
+export default connect(
+  null,
+  { fetchUser }
+)(App);

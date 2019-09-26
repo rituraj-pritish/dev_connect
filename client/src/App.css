@@ -36,3 +36,9 @@ body {
 .landing-content a {
   margin: 0 5px;
 }
+
+#toast-container {
+  top: 10% !important;
+  right: 10% !important;
+  
+}

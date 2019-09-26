@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const PostsController = require('../controllers/postsController');
+// const requireLogin = require('../middlewares/requireLogin')
 
 //@route    POST /posts
 //@desc     create a post

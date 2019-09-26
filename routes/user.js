@@ -2,17 +2,36 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const UsersController = require('../controllers/usersController');
+const requireLogin = require('../middlewares/requireLogin')
 
-//@route    POST /users/register
+//@route    POST /user/register
 //@desc     register new user with email n password
 //@access   PUBLIC
 router.post('/register', UsersController.register);
 
-//@route    POST /users/login
+//@route    POST /user/login
 //@desc     login user local st
 //@access   PUBLIC
-router.post('/login', passport.authenticate('local'), (req, res) => {
+router.post('/login', passport.authenticate('local'),(req,res)=> {
+  console.log(req.user);
   res.send(req.user);
+});
+
+//@route    GET /user/current_user
+//@desc     get current user
+//@access   Private
+router.get('/current_user', requireLogin,(req,res)=> {
+  console.log('user',req.user);
+  res.send({user:req.user});
+});
+
+//@route    GET /user/logout
+//@desc     logout user
+//@access   Private
+router.get('/logout',requireLogin, (req,res) => {
+  req.logOut()
+  req.session = null;
+  res.send('logout')
 });
 
 //google passport authentication

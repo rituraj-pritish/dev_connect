@@ -5,7 +5,7 @@ const User = require('../models/User');
 module.exports = {
   createPost: async (req, res) => {
     try {
-      const user = await User.findById(req.session.passport.user).select(
+      const user = await User.findById(req.user.id).select(
         '-password'
       );
 
@@ -13,7 +13,7 @@ module.exports = {
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
-        user: req.session.passport.user
+        user: req.user.id
       });
 
       const post = await newPost.save();
@@ -59,7 +59,7 @@ module.exports = {
       const post = await Post.findById(req.params.post_id);
 
       //check user
-      if (post.user.toString() !== req.session.passport.user) {
+      if (post.user.toString() !== req.user.id) {
         return res.status(401).json({ msg: 'User not authorized' });
       }
 
@@ -81,13 +81,13 @@ module.exports = {
       //check if post is already liked by user
       if (
         post.likes.filter(
-          like => like.user.toString() === req.session.passport.user
+          like => like.user.toString() === req.user.id
         ).length > 0
       ) {
         return res.status(400).json({ msg: 'Post already liked' });
       }
 
-      post.likes.unshift({ user: req.session.passport.user });
+      post.likes.unshift({ user: req.user.id });
 
       await post.save();
 
@@ -108,7 +108,7 @@ module.exports = {
       //check if post is already liked by user
       if (
         post.likes.filter(
-          like => like.user.toString() === req.session.passport.user
+          like => like.user.toString() === req.user.id
         ).length === 0
       ) {
         console.log('ran');
@@ -117,14 +117,14 @@ module.exports = {
 
       console.log(
         post.likes.filter(
-          like => like.user.toString() === req.session.passport.user
+          like => like.user.toString() === req.user.id
         ).length === 0
       );
 
       //get remove index
       const removeIndex = post.likes
         .map(like => like.user.toString())
-        .indexOf(req.session.passport.user);
+        .indexOf(req.user.id);
 
       post.likes.splice(removeIndex, 1);
       await post.save();
@@ -140,7 +140,7 @@ module.exports = {
 
   addComment: async (req, res) => {
     try {
-      const user = await User.findById(req.session.passport.user).select(
+      const user = await User.findById(req.user.id).select(
         '-password'
       );
       const post = await Post.findById(req.params.post_id);
@@ -149,7 +149,7 @@ module.exports = {
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
-        user: req.session.passport.user
+        user: req.user.id
       };
 
       post.comments.unshift(newComment);
@@ -175,7 +175,7 @@ module.exports = {
         return res.status(404).json({ msg: 'Comment does not exist' });
       }
 
-      if (comment.user.toString() !== req.session.passport.user) {
+      if (comment.user.toString() !== req.user.id) {
         return res.status(401).json({ msg: 'Not Authorized' });
       }
 

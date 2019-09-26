@@ -12,7 +12,7 @@ module.exports = {
       if (existingUser) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'User already exists' }] });
+          .json({msg: 'User already exists' });
       }
 
       const user = new User({

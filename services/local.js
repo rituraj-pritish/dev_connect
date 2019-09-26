@@ -16,22 +16,16 @@ passport.use(
         const user = await User.findOne({
           'local.email': email
         });
-        console.log(chalk.red('local'));
-        console.log(chalk.red(user));
 
         if (!user) {
-          return res.status(400).json({
-            errors: [{ msg: 'Invalid credentials' }]
-          });
+          return done(null, false);
         }
 
         //password match check
         const isMatch = await bcrypt.compare(password, user.local.password);
 
         if (!isMatch) {
-          return res.status(400).json({
-            errors: [{ msg: 'Invalid credentials' }]
-          });
+          return done(null, false);
         }
 
         console.log(chalk.green('success'));

@@ -5,12 +5,10 @@ const User = require('../models/User');
 
 module.exports = {
   ownProfile: async (req, res) => {
-    if (!req.session.passport.user) {
-      return res.send('Not Authorized');
-    }
+  
     try {
       const profile = await Profile.findOne({
-        id: req.session.passport.user
+        id: req.user.id
       }).populate('user', ['name', 'avatar']);
 
       if (!profile) {
@@ -42,7 +40,7 @@ module.exports = {
     //build profile object
     const profileFields = {};
     // profileFields.user = req.user.id;
-    profileFields.user = req.session.passport.user;
+    profileFields.user = req.user.id;
     if (company) profileFields.company = company;
     if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
@@ -62,13 +60,13 @@ module.exports = {
     if (instagram) profileFields.social.instagram = instagram;
     try {
       let profile = await Profile.findOne({
-        user: req.session.passport.user
+        user: req.user.id
       });
 
       if (profile) {
         //update
         profile = await Profile.findOneAndUpdate(
-          { user: req.session.passport.user },
+          { user: req.user.id },
           { $set: profileFields },
           { new: true }
         );
@@ -123,10 +121,10 @@ module.exports = {
       //todo remove users posts
 
       //remove profile
-      await Profile.findOneAndRemove({ user: req.session.passport.user });
+      await Profile.findOneAndRemove({ user: req.user.id });
 
       //remove user
-      await User.findOneAndRemove({ _id: req.session.passport.user });
+      await User.findOneAndRemove({ _id: req.user.id });
 
       res.json({ msg: 'User removed' });
     } catch (err) {
@@ -160,7 +158,7 @@ module.exports = {
     };
     try {
       const profile = await Profile.findOne({
-        user: req.session.passport.user
+        user: req.user.id
       });
       profile.experience.unshift(newExp);
 
@@ -176,7 +174,7 @@ module.exports = {
   deleteExperience: async (req, res) => {
     try {
       const profile = await Profile.findOne({
-        user: req.session.passport.user
+        user: req.user.id
       });
 
       //get remove index
@@ -217,7 +215,7 @@ module.exports = {
     };
     try {
       const profile = await Profile.findOne({
-        user: req.session.passport.user
+        user: req.user.id
       });
       profile.education.unshift(newEdu);
 
@@ -233,7 +231,7 @@ module.exports = {
   deleteEducation: async (req, res) => {
     try {
       const profile = await Profile.findOne({
-        user: req.session.passport.user
+        user: req.user.id
       });
 
       //get remove index
