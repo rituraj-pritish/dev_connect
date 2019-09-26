@@ -8,4 +8,18 @@ module.exports = function(app) {
       changeOrigin: true
     })
   );
+  app.use(
+    '/profile',
+    proxy({
+      target: 'http://localhost:5000',
+      changeOrigin: true
+    })
+  );
+  app.use(
+    '/posts',
+    proxy({
+      target: 'http://localhost:5000',
+      changeOrigin: true
+    })
+  );
 };

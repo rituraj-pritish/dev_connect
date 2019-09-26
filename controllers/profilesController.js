@@ -5,14 +5,14 @@ const User = require('../models/User');
 
 module.exports = {
   ownProfile: async (req, res) => {
-  
+  console.log(req.user.id);
     try {
       const profile = await Profile.findOne({
-        id: req.user.id
+        user: req.user.id
       }).populate('user', ['name', 'avatar']);
 
       if (!profile) {
-        res.status(400).json({ msg: 'There is no profile for this user' });
+        return res.status(400).json({ msg: 'There is no profile for this user' });
       }
 
       res.json(profile);

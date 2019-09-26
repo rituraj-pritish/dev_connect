@@ -2,23 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import {logout} from '../../actions/auth'
+
 const Navbar = props => {
-  const { isAuthenticated, loading } = props;
+  const { isAuthenticated, loading,logout } = props;
+
+  const handleLogout = () => {
+    logout();
+  }
 
   return (
-    <nav>
+    <nav style={{marginBottom: '30px'}}>
       <div className='nav-wrapper teal lighten-2'>
         <Link to='/' className='brand-logo left'>
           {`</>DevConnector`}
         </Link>
         <ul id='nav-mobile' className='right'>
           <li>
-            <Link to='/users'>Developers</Link>
+            <Link to='/developers'>Developers</Link>
           </li>
           {isAuthenticated  ? (
             <span>
               <li>
-                <a href='/user/logout' ><i className='material-icons'>exit_to_app</i></a>
+                <Link onClick={handleLogout} to='' ><i className='material-icons'>exit_to_app</i></Link>
               </li>
             </span>
           ) : (
@@ -42,4 +48,4 @@ const mapStateToProps = state => ({
   loading: state.auth.loading
 });
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps,{logout})(Navbar);

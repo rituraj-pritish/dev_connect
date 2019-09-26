@@ -2,19 +2,19 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
-import Navbar from './components/Navbar';
-import Register from './components/Register';
-import Login from './components/Login';
-import Developers from './components/Developers';
-import Landing from './components/Landing';
-import CustomAlert from './components/CustomAlert';
-import Dashboard from './components/Dashboard';
+import Navbar from './components/layout/Navbar';
+import Register from './components/pages/Register';
+import Login from './components/pages/Login';
+import Developers from './components/pages/Developers';
+import Landing from './components/pages/Landing';
+import CustomAlert from './components/layout/CustomAlert';
+import Dashboard from './components/pages/Dashboard';
 import PrivateRoute from './components/PrivateRoute';
 
 import { fetchUser } from './actions/auth';
+import CreateProfile from './components/profile/CreateProfile';
 
 const App = ({ fetchUser }) => {
   useEffect(() => {
@@ -32,6 +32,7 @@ const App = ({ fetchUser }) => {
             <Route exact path='/users' component={Developers} />
             <Route exact path='/' component={Landing} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            <PrivateRoute exact path='/create-profile' component={CreateProfile} />
           </Switch>
         </div>
         <CustomAlert />
