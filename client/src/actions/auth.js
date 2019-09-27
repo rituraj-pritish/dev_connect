@@ -37,6 +37,7 @@ export const logout = () => async dispatch => {
     type: LOGOUT
   });
   dispatch({type: CLEAR_PROFILE})
+  window.location.assign('/login')
 };
 
 export const fetchUser = () => async dispatch => {

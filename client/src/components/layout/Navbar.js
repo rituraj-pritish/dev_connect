@@ -24,7 +24,7 @@ const Navbar = props => {
           {isAuthenticated  ? (
             <span>
               <li>
-                <Link onClick={handleLogout} to='' ><i className='material-icons'>exit_to_app</i></Link>
+                <Link onClick={handleLogout} to='' >Logout<i className='material-icons right'>exit_to_app</i></Link>
               </li>
             </span>
           ) : (
