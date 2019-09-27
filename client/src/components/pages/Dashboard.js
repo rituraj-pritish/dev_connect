@@ -5,10 +5,12 @@ import { Link, Redirect } from 'react-router-dom';
 import { getCurrentProfile } from '../../actions/profile';
 import { fetchUser } from '../../actions/auth';
 import Loader from '../layout/Loader';
-import DashboardLinks from '../DashboardLinks';
+import DashboardLinks from '../dashboard/DashboardLinks';
+import Experience from '../dashboard/Experience';
+import Education from '../dashboard/Education';
 
 const Dashboard = props => {
-  const { getCurrentProfile,fetchUser, auth, profile } = props;
+  const { getCurrentProfile, fetchUser, auth, profile } = props;
 
   useEffect(() => {
     getCurrentProfile();
@@ -23,13 +25,18 @@ const Dashboard = props => {
     </p>
   );
 
-  const haveProfile = <p>have</p>;
+  const haveProfile = (
+    <div>
+      <Experience />
+      <Education />
+    </div>
+  );
 
   if (!auth.isAuthenticated) {
     return <Redirect to='/login' />;
   }
 
-  console.log(auth.loading,profile.loading);
+  console.log(auth.loading, profile.loading);
 
   if (auth.loading || profile.loading || auth.user.user === null) {
     return <Loader />;
@@ -52,5 +59,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile,fetchUser }
+  { getCurrentProfile, fetchUser }
 )(Dashboard);
