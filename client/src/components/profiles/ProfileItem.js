@@ -35,7 +35,7 @@ const ProfileItem = props => {
         <Link
           style={{ minWidth: '118px', fontSize: '12px' }}
           to={`/profiles/${_id}`}
-          className='btn teal lighten-2'
+          className='btn teal btn-mrtop lighten-2'
         >
           View Profile
         </Link>

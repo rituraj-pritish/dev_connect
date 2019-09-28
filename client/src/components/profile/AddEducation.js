@@ -125,9 +125,8 @@ const AddEducation = ({addEducation}) => {
         </div>
 
         <button
-          style={{ marginTop: '20px' }}
           type='submit'
-          className='waves-effect waves-light btn teal text-white lighten-2'
+          className='waves-effect waves-light btn teal btn-mrtop text-white lighten-2'
         >
           Submit
           <i className='material-icons right'>send</i>

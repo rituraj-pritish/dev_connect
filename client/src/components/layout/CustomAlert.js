@@ -7,17 +7,22 @@ const CustomAlert = ({ errors }) => {
     M.AutoInit();
   }, [errors]);
 
+  //eslint-disable-next-line
   errors.map(error => {
     if (error.alertType === 'success') {
       M.toast({ html: error.msg, classes: 'green' });
     }
 
     if (error.alertType === 'fail') {
-      M.toast({ html: error.msg, classes: 'red float-right' });
+      M.toast({ html: error.msg, classes: 'red' });
+    }
+
+    if (error.alertType === 'info') {
+      M.toast({ html: error.msg, classes: 'grey' });
     }
   });
 
-  return <div></div>;
+  return <div />;
 };
 
 const mapStateToProps = state => ({

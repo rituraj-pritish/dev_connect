@@ -18,7 +18,7 @@ const Profile = ({
 }) => {
   useEffect(() => {
     getProfileById(match.params.id);
-  }, [getProfileById]);
+  }, [getProfileById, match.params.id]);
 
   if (loading || profile === null) {
     return <Loader />;
@@ -80,7 +80,9 @@ const Profile = ({
           </div>
         </div>
       </div>
-      {profile.githubUsername && <ProfileGithub username={profile.githubUsername} />}
+      {profile.githubUsername && (
+        <ProfileGithub username={profile.githubUsername} />
+      )}
     </div>
   );
 };

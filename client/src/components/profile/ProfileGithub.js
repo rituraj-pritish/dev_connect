@@ -7,7 +7,7 @@ import { getGithubRepos } from '../../actions/profile';
 const ProfileGithub = ({ username, repos, getGithubRepos }) => {
   useEffect(() => {
     getGithubRepos(username);
-  }, [getGithubRepos]);
+  }, [getGithubRepos, username]);
 
   if (repos === null) {
     return <Loader />;
@@ -29,6 +29,7 @@ const ProfileGithub = ({ username, repos, getGithubRepos }) => {
               <a
                 href={repo.html_url}
                 target='_blank'
+                rel='noopener noreferrer'
                 className='collection-item'
               >
                 {repo.name}
@@ -42,6 +43,7 @@ const ProfileGithub = ({ username, repos, getGithubRepos }) => {
               <a
                 href={repo.html_url}
                 target='_blank'
+                rel='noopener noreferrer'
                 className='collection-item'
               >
                 {repo.name}

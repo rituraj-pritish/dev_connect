@@ -37,11 +37,27 @@ body {
   margin: 0 5px;
 }
 
-.btn {
+.bold {
+  font-weight: bold;
+}
+
+.post-left-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-mrtop {
   margin: 0 5px;
   margin-top: 20px;
 }
 
-.bold {
-  font-weight: bold;
+.post-btns {
+  display: flex;
+  align-items: center;
+}
+
+.mr {
+  margin: 0 5px;
 }

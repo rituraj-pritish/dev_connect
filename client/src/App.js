@@ -19,6 +19,8 @@ import AddExperience from './components/profile/AddExperience';
 import AddEducation from './components/profile/AddEducation';
 import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
 
 const App = ({ fetchUser, loading }) => {
   useEffect(() => {
@@ -56,6 +58,16 @@ const App = ({ fetchUser, loading }) => {
               exact
               path='/add-education'
               component={AddEducation}
+            />
+            <PrivateRoute
+              exact
+              path='/allposts'
+              component={Posts}
+            />
+            <PrivateRoute
+              exact
+              path='/post/:id'
+              component={Post}
             />
           </Switch>
         </div>

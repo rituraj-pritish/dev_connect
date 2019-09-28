@@ -257,9 +257,8 @@ const EditProfile = props => {
         </div>
 
         <button
-          style={{ marginTop: '20px' }}
           type='submit'
-          className='waves-effect waves-light btn teal text-white lighten-2'
+          className='waves-effect waves-light btn btn-mrtop teal text-white lighten-2'
         >
           Submit
           <i className='material-icons right'>send</i>
