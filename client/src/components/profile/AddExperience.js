@@ -14,7 +14,7 @@ const AddExperience = ({addExperience}) => {
     description: ''
   });
 
-  const { company, location, title, from, to, current, description } = formData;
+  const { company, location, title, from, to, description } = formData;
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +31,7 @@ const AddExperience = ({addExperience}) => {
       current: to === '' ? true : false,
       description
     };
-    console.log(newExp);
+
     addExperience(newExp)
   };
 

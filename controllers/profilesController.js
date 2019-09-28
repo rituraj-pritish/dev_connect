@@ -2,10 +2,10 @@ const request = require('request')
 const keys = require('../config/keys')
 const Profile = require('../models/Profile');
 const User = require('../models/User');
+const Post = require('../models/Post');
 
 module.exports = {
   ownProfile: async (req, res) => {
-  console.log(req.user.id);
     try {
       const profile = await Profile.findOne({
         user: req.user.id
@@ -73,7 +73,7 @@ module.exports = {
 
         return res.json(profile);
       }
-      console.log('called');
+
       //create
       profile = await new Profile(profileFields).save();
 
@@ -118,7 +118,8 @@ module.exports = {
 
   deleteProfile: async (req, res) => {
     try {
-      //todo remove users posts
+      //remove users posts
+      await Post.deleteMany({user: req.user.id})
 
       //remove profile
       await Profile.findOneAndRemove({ user: req.user.id });
@@ -253,7 +254,7 @@ module.exports = {
   getRepos: async (req,res) => {
     try {
       const options = {
-        uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${keys.githubClientId}&client_secret=${keys.githubSecret}`,
+        uri: `https://api.github.com/users/${req.params.username}/repos?per_page=10&sort=created:asc&client_id=${keys.githubClientId}&client_secret=${keys.githubSecret}`,
         headers: { 'user-agent': 'node-js'}
       }
 

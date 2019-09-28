@@ -48,7 +48,7 @@ export const fetchUser = () => async dispatch => {
       payload: res.data
     });
   } catch (err) {
-    console.log(err.response);
+
     dispatch({
       type: LOGIN_FAIL
     });

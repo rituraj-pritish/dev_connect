@@ -11,7 +11,6 @@ passport.use(
       callbackURL: '/user/google/callback'
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(chalk.blue(JSON.stringify(profile)));
       
       try {
         const existingUser = await User.findOne({
@@ -19,7 +18,6 @@ passport.use(
         });
 
         if (existingUser) {
-          console.log(chalk.red('user already exists'));
           return done(null, existingUser);
         }
 

@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS,LOGIN_FAIL, FETCH_USER,LOGOUT} from '../actions/types'
+import {LOGIN_SUCCESS,LOGIN_FAIL, FETCH_USER,LOGOUT, ACCOUNT_DELETE} from '../actions/types'
 
 const initialState = {
   isAuthenticated: false,
@@ -17,16 +17,11 @@ export default (state=initialState,action) => {
         user: payload
       }
     case LOGIN_FAIL:
+    case LOGOUT:
+    case ACCOUNT_DELETE:
       return {
         ...state,
         loading: false,
-        isAuthenticated: false,
-        user: null
-      }
-    case LOGOUT:
-      return {
-        ...state,
-        loading:false,
         isAuthenticated: false,
         user: null
       }

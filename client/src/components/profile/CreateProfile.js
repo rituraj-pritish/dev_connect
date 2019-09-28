@@ -112,8 +112,8 @@ const CreateProfile = props => {
           </div>
 
           <div className='input-field col s6'>
-            <select>
-              <option value='' disabled selected>
+            <select value={status} onChange={handleChange} name='status' >
+              <option value='disabled'>
                 Select
               </option>
               <option value='Sr. Developer'>Sr. Developer</option>

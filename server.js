@@ -23,7 +23,7 @@ app.use(passport.session());
 
 app.use('/user', require('./routes/user'));
 app.use('/profile', require('./routes/profile'));
-app.use('/posts', requireLogin, require('./routes/posts'));
+app.use('/posts',requireLogin, require('./routes/posts'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);

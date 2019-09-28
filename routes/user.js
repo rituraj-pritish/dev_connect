@@ -13,7 +13,6 @@ router.post('/register', UsersController.register);
 //@desc     login user local st
 //@access   PUBLIC
 router.post('/login', passport.authenticate('local'),(req,res)=> {
-  console.log(req.user);
   res.send(req.user);
 });
 
@@ -21,7 +20,6 @@ router.post('/login', passport.authenticate('local'),(req,res)=> {
 //@desc     get current user
 //@access   Private
 router.get('/current_user', requireLogin,(req,res)=> {
-  console.log('user',req.user);
   res.send({user:req.user});
 });
 
@@ -49,7 +47,6 @@ router.get(
     session: true
   }),
   (req, res) => {
-    console.log(req.user);
     res.send('google auth');
   }
 );

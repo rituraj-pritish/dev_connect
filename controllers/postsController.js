@@ -111,15 +111,9 @@ module.exports = {
           like => like.user.toString() === req.user.id
         ).length === 0
       ) {
-        console.log('ran');
+
         return res.status(400).json({ msg: 'Post not yet liked' });
       }
-
-      console.log(
-        post.likes.filter(
-          like => like.user.toString() === req.user.id
-        ).length === 0
-      );
 
       //get remove index
       const removeIndex = post.likes

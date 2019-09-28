@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const CustomAlert = ({ errors }) => {
-
   useEffect(() => {
     M.AutoInit();
   }, [errors]);
 
-  errors.filter(error => errors.indexOf(error) <= 3).map(error => {
+  errors.map(error => {
     if (error.alertType === 'success') {
       M.toast({ html: error.msg, classes: 'green' });
     }
@@ -16,7 +15,6 @@ const CustomAlert = ({ errors }) => {
     if (error.alertType === 'fail') {
       M.toast({ html: error.msg, classes: 'red float-right' });
     }
-
   });
 
   return <div></div>;

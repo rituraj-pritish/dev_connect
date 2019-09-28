@@ -14,7 +14,7 @@ const AddEducation = ({addEducation}) => {
     description: ''
   });
 
-  const { school, degree, fieldOfStudy, from, to, current, description } = formData;
+  const { school, degree, fieldOfStudy, from, to, description } = formData;
 
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

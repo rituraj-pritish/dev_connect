@@ -30,21 +30,18 @@ body {
   color: #ebf0f2;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .landing-content a {
   margin: 0 5px;
 }
 
-#toast-container {
-  top: 10% !important;
-  right: 10% !important;
-  
+.btn {
+  margin: 0 5px;
+  margin-top: 20px;
 }
 
-.btn{
-  margin: 0 5px;
-  margin-top: 20px
-  
+.bold {
+  font-weight: bold;
 }

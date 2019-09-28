@@ -28,8 +28,6 @@ passport.use(
           return done(null, false);
         }
 
-        console.log(chalk.green('success'));
-
         return done(null, user);
       } catch (error) {
         console.log(chalk.red(error));

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {logout} from '../../actions/auth'
 
 const Navbar = props => {
-  const { isAuthenticated, loading,logout } = props;
+  const { isAuthenticated,logout } = props;
 
   const handleLogout = () => {
     logout();
@@ -19,7 +19,7 @@ const Navbar = props => {
         </Link>
         <ul id='nav-mobile' className='right'>
           <li>
-            <Link to='/developers'>Developers</Link>
+            <Link to='/profiles'>Developers</Link>
           </li>
           {isAuthenticated  ? (
             <span>
@@ -44,8 +44,7 @@ const Navbar = props => {
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  loading: state.auth.loading
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps,{logout})(Navbar);

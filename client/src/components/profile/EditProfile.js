@@ -58,6 +58,7 @@ const EditProfile = props => {
     });
 
     M.AutoInit();
+    //eslint-disable-next-line
   }, [loading]);
 
   const handleChange = e => {
@@ -130,10 +131,10 @@ const EditProfile = props => {
           </div>
 
           <div className='input-field col s6'>
-            <select>
-              <option value={status} defaultValue='select' disabled>
-                Select
-              </option>
+          <select value={status} onChange={handleChange} name='status' >
+          <option value='disabled'>
+            Select
+          </option>
               <option value='Sr. Developer'>Sr. Developer</option>
               <option value='Jr. Developer'>Jr. Developer</option>
               <option value='Student'>Student</option>

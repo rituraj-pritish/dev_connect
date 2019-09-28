@@ -11,7 +11,6 @@ module.exports = async () => {
       useUnifiedTopology: true
     });
 
-    console.log(chalk.green('db connected'));
   } catch (err) {
     console.error(chalk.red(err));
     process.exit(1);

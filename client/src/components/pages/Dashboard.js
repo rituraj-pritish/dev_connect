@@ -2,19 +2,25 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-import { getCurrentProfile } from '../../actions/profile';
-import { fetchUser } from '../../actions/auth';
+import M from 'materialize-css/dist/js/materialize.min.js';
+import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 import Loader from '../layout/Loader';
 import DashboardLinks from '../dashboard/DashboardLinks';
 import Experience from '../dashboard/Experience';
 import Education from '../dashboard/Education';
+import AccountDeleteModal from '../AccountDeleteModal';
 
 const Dashboard = props => {
-  const { getCurrentProfile, fetchUser, auth, profile } = props;
+  const { getCurrentProfile, auth, profile, deleteAccount } = props;
 
   useEffect(() => {
+    M.AutoInit();
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
+
+  useEffect(() => {
+    M.AutoInit();
+  });
 
   const noProfile = (
     <p>
@@ -27,6 +33,7 @@ const Dashboard = props => {
 
   const haveProfile = (
     <div>
+      <DashboardLinks />
       <Experience />
       <Education />
     </div>
@@ -36,18 +43,25 @@ const Dashboard = props => {
     return <Redirect to='/login' />;
   }
 
-  console.log(auth.loading, profile.loading);
-
   if (auth.loading || profile.loading || auth.user.user === null) {
     return <Loader />;
   }
 
+  const handleDelete = () => {
+    deleteAccount(auth.user.user._id);
+  };
+
   return (
-    <div>
+    <div className='card-panel' >
+      <AccountDeleteModal handleDelete={handleDelete} />
       <h4 className='teal-text'>Dashboard</h4>
       <h5>Welcome {auth.user.user.name}</h5>
-      <DashboardLinks />
+
       {profile.profile === null ? noProfile : haveProfile}
+      <br />
+      <a href='#acc-delete-modal' className='btn red lighten-1 modal-trigger '>
+        Delete Account
+      </a>
     </div>
   );
 };
@@ -59,5 +73,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, fetchUser }
+  { getCurrentProfile, deleteAccount }
 )(Dashboard);

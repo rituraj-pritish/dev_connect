@@ -93,7 +93,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
         <div className='grey-text'>
           Already have an account
-          <Link to='/user/login'> Login</Link>
+          <Link to='/login'> Login</Link>
         </div>
 
         <button

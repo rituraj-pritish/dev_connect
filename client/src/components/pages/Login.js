@@ -61,7 +61,7 @@ const Login = ({ setAlert, login, isAuthenticated }) => {
         </div>
         <div className='grey-text'>
           Doesn't have an account
-          <Link to='/user/register'> Register</Link>
+          <Link to='/register'> Register</Link>
         </div>
         <button
           style={{ marginTop: '20px' }}
