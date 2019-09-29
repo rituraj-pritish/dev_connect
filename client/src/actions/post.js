@@ -50,13 +50,8 @@ export const addLike = post_id => async dispatch => {
       payload: { likes: res.data, post_id }
     });
   } catch (err) {
-    if (err.response.data) {
-      dispatch(setAlert(err.response.data.msg, 'info'));
-    }
-    dispatch({
-      type: POST_ERROR,
-      payload: err.response.statusText
-    });
+    
+    dispatch(setAlert('Post already liked', 'info'));
   }
 };
 
@@ -68,13 +63,7 @@ export const removeLike = post_id => async dispatch => {
       payload: { likes: res.data, post_id }
     });
   } catch (err) {
-    if (err.response.data) {
-      dispatch(setAlert(err.response.data.msg, 'info'));
-    }
-    dispatch({
-      type: POST_ERROR,
-      payload: err.response.statusText
-    });
+    dispatch(setAlert('Post not yet liked', 'info'));
   }
 };
 
@@ -87,10 +76,6 @@ export const deletePost = post_id => async dispatch => {
     });
     dispatch(setAlert('Post Removed', 'success'));
   } catch (err) {
-    console.log(err);
-    if (err.response.data) {
-      dispatch(setAlert(err.response.data.msg, 'fail'));
-    }
     dispatch({
       type: POST_ERROR,
       payload: err.response.statusText
@@ -107,10 +92,6 @@ export const addPost = data => async dispatch => {
     });
     dispatch(setAlert('Post Added', 'success'));
   } catch (err) {
-    console.log(err);
-    if (err.response.data) {
-      dispatch(setAlert(err.response.data.msg, 'fail'));
-    }
     dispatch({
       type: POST_ERROR,
       payload: err.response.statusText
@@ -127,9 +108,6 @@ export const addComment = (data, postId) => async dispatch => {
     });
     dispatch(setAlert('Comment Added', 'success'));
   } catch (err) {
-    if (err.response.data) {
-      dispatch(setAlert(err.response.data.msg, 'fail'));
-    }
     dispatch({
       type: POST_ERROR,
       payload: err.response.statusText
@@ -146,10 +124,6 @@ export const deleteComment = (postId, commentId) => async dispatch => {
     });
     dispatch(setAlert('Comment Removed', 'success'));
   } catch (err) {
-    console.log(err);
-    if (err.response.data) {
-      dispatch(setAlert(err.response.data.msg, 'fail'));
-    }
     dispatch({
       type: POST_ERROR,
       payload: err.response.statusText

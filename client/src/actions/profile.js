@@ -113,12 +113,7 @@ export const addExperience = data => async dispatch => {
 
     window.location.assign('/dashboard');
   } catch (err) {
-    //for backend errors
-    // const error = err.response.data.msg
 
-    // if(error) {
-    //   dispatch(setAlert('error','fail'))
-    // }
     dispatch({
       type: PROFILE_ERROR,
       payload: err.response.statusText
