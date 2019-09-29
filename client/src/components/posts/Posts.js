@@ -6,12 +6,11 @@ import { getPosts, clearPost } from '../../actions/post';
 import PostItem from './PostItem';
 import CreatePost from './CreatePost';
 
-
-const Posts = ({ getPosts,clearPost, post: { posts, loading } }) => {
+const Posts = ({ getPosts, clearPost, post: { posts, loading } }) => {
   useEffect(() => {
-    clearPost()
+    clearPost();
     getPosts();
-  }, [getPosts]);
+  }, [getPosts, clearPost]);
 
   if (loading) {
     return <Loader />;
@@ -36,5 +35,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getPosts,clearPost }
+  { getPosts, clearPost }
 )(Posts);

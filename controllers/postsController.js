@@ -44,7 +44,7 @@ module.exports = {
         return res.status(404).json({ msg: 'No post found' });
       }
 
-      res.send(posts);
+      res.send(post);
     } catch (err) {
       console.error(err);
       if (err.kind === 'ObjectId') {

@@ -27,7 +27,7 @@ export const getPosts = () => async dispatch => {
   }
 };
 
-export const getPost = (id) => async dispatch => {
+export const getPost = id => async dispatch => {
   try {
     const res = await axios.get(`/posts/${id}`);
     dispatch({
@@ -118,7 +118,7 @@ export const addPost = data => async dispatch => {
   }
 };
 
-export const addComment = (data,postId) => async dispatch => {
+export const addComment = (data, postId) => async dispatch => {
   try {
     const res = await axios.post(`/posts/comment/${postId}`, data);
     dispatch({
@@ -127,7 +127,6 @@ export const addComment = (data,postId) => async dispatch => {
     });
     dispatch(setAlert('Comment Added', 'success'));
   } catch (err) {
-
     if (err.response.data) {
       dispatch(setAlert(err.response.data.msg, 'fail'));
     }
@@ -138,7 +137,7 @@ export const addComment = (data,postId) => async dispatch => {
   }
 };
 
-export const deleteComment = (postId,commentId) => async dispatch => {
+export const deleteComment = (postId, commentId) => async dispatch => {
   try {
     await axios.delete(`/posts/comment/${postId}/${commentId}`);
     dispatch({
@@ -160,4 +159,4 @@ export const deleteComment = (postId,commentId) => async dispatch => {
 
 export const clearPost = () => ({
   type: CLEAR_POST
-})
+});

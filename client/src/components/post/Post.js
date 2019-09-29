@@ -12,7 +12,7 @@ import CommentItem from './CommentItem';
 const Post = ({ clearPost, getPost, loading, post, match }) => {
   useEffect(() => {
     getPost(match.params.id);
-  }, [getPost]);
+  }, [getPost, match.params.id]);
 
   if (loading || post === null) {
     return <Loader />;
@@ -49,7 +49,9 @@ const Post = ({ clearPost, getPost, loading, post, match }) => {
       </div>
       <CreateComment postId={_id} />
       {comments.length > 0 ? (
-        comments.map(comment => <CommentItem key={comment._id} postId={_id} {...comment} />)
+        comments.map(comment => (
+          <CommentItem key={comment._id} postId={_id} {...comment} />
+        ))
       ) : (
         <p className='grey-text'>No comments to show... Add one</p>
       )}

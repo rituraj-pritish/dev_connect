@@ -1,4 +1,4 @@
-import React, { Fragment,useState ,useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
@@ -14,7 +14,6 @@ const PostItem = ({
   deletePost,
   getPost
 }) => {
-
   const handleLike = () => {
     addLike(_id);
   };
@@ -54,10 +53,7 @@ const PostItem = ({
             <Link to='#' onClick={handleUnLike} className='btn btn-flat mr'>
               <i className='material-icons'>thumb_down</i>
             </Link>
-            <Link
-              to={`/post/${_id}`}
-              className='btn mr '
-            >
+            <Link to={`/post/${_id}`} className='btn mr '>
               Comments
               {comments.length > 0 && <span> {comments.length}</span>}
             </Link>

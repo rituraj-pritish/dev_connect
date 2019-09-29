@@ -24,7 +24,11 @@ const postSchema = new mongoose.Schema({
       },
       text: String,
       name: String,
-      avatar: String
+      avatar: String,
+      date: {
+        type: Date,
+        default: new Date()
+      }
     }
   ],
   date: {

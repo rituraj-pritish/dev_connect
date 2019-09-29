@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "social media for developers",
   "main": "server.js",
+  "engines": {
+    "node": "10.16.3",
+    "npm": "6.11.3"
+  },
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run client\" \"npm run server\" "
+    "dev": "concurrently \"npm run client\" \"npm run server\" ",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "RP",
   "license": "ISC",
