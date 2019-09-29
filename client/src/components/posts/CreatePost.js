@@ -2,14 +2,19 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { addPost } from '../../actions/post';
+import { setAlert } from '../../actions/alert';
 
-const CreatePost = ({ addPost }) => {
+const CreatePost = ({ addPost,setAlert }) => {
   const [text, setText] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    addPost({ text });
-    setText('');
+    if (text === '') {
+      setAlert('Post cannot be empty', 'fail');
+    } else {
+      addPost({ text });
+      setText('');
+    }
   };
   return (
     <div className='row'>
@@ -35,5 +40,5 @@ const CreatePost = ({ addPost }) => {
 
 export default connect(
   null,
-  { addPost }
+  { addPost, setAlert }
 )(CreatePost);

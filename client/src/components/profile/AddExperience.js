@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addExperience } from '../../actions/profile';
 import { Link } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
 
-const AddExperience = ({ addExperience }) => {
+const AddExperience = ({ addExperience,setAlert }) => {
   const [formData, setFormData] = useState({
     company: '',
     title: '',
@@ -22,17 +23,22 @@ const AddExperience = ({ addExperience }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newExp = {
-      company,
-      location,
-      title,
-      from,
-      to,
-      current: to === '' ? true : false,
-      description
-    };
 
-    addExperience(newExp);
+    if (company === '' || title === '' || location === '' || from === '') {
+      setAlert('Please fill all required fields', 'fail');
+    } else {
+      const newExp = {
+        company,
+        location,
+        title,
+        from,
+        to,
+        current: to === '' ? true : false,
+        description
+      };
+
+      addExperience(newExp);
+    }
   };
 
   return (
@@ -142,5 +148,5 @@ const AddExperience = ({ addExperience }) => {
 
 export default connect(
   null,
-  { addExperience }
+  { addExperience,setAlert }
 )(AddExperience);

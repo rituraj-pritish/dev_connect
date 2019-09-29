@@ -4,9 +4,16 @@ import { Link } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 import { getCurrentProfile, createProfile } from '../../actions/profile';
+import { setAlert } from '../../actions/alert';
 
 const EditProfile = props => {
-  const { loading, profile, createProfile, getCurrentProfile } = props;
+  const {
+    loading,
+    profile,
+    createProfile,
+    getCurrentProfile,
+    setAlert
+  } = props;
 
   const [formData, setFormData] = useState({
     company: '',
@@ -67,21 +74,26 @@ const EditProfile = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newProfile = {
-      company,
-      website,
-      location,
-      status,
-      skills,
-      githubUsername,
-      bio,
-      twitter,
-      facebook,
-      linkedIn,
-      youtube,
-      instagram
-    };
-    createProfile(newProfile, true);
+
+    if (company === '' || location === '' || status === '' || skills === '') {
+      setAlert('Please fill all required fields', 'fail');
+    } else {
+      const newProfile = {
+        company,
+        website,
+        location,
+        status,
+        skills,
+        githubUsername,
+        bio,
+        twitter,
+        facebook,
+        linkedIn,
+        youtube,
+        instagram
+      };
+      createProfile(newProfile, true);
+    }
   };
 
   console.log(status);
@@ -286,5 +298,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, createProfile }
+  { getCurrentProfile, createProfile, setAlert }
 )(EditProfile);

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addEducation } from '../../actions/profile';
 import { Link } from 'react-router-dom';
+import { setAlert } from '../../actions/alert';
 
-const AddEducation = ({ addEducation }) => {
+const AddEducation = ({ addEducation,setAlert }) => {
   const [formData, setFormData] = useState({
     school: '',
     fieldOfStudy: '',
@@ -22,17 +23,22 @@ const AddEducation = ({ addEducation }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newEdu = {
-      school,
-      degree,
-      fieldOfStudy,
-      from,
-      to,
-      current: to === '' ? true : false,
-      description
-    };
 
-    addEducation(newEdu);
+    if (school === '' || degree === '' || fieldOfStudy === '' || from === '') {
+      setAlert('Please fill all required fields', 'fail');
+    } else {
+      const newEdu = {
+        school,
+        degree,
+        fieldOfStudy,
+        from,
+        to,
+        current: to === '' ? true : false,
+        description
+      };
+
+      addEducation(newEdu);
+    }
   };
 
   return (
@@ -142,5 +148,5 @@ const AddEducation = ({ addEducation }) => {
 
 export default connect(
   null,
-  { addEducation }
+  { addEducation,setAlert }
 )(AddEducation);

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-import {createProfile} from '../../actions/profile'
+import { createProfile } from '../../actions/profile';
+import { setAlert } from '../../actions/alert';
 
 const CreateProfile = props => {
-  const {createProfile} = props
+  const { createProfile, setAlert } = props;
 
   useEffect(() => {
     M.AutoInit();
@@ -48,21 +49,26 @@ const CreateProfile = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newProfile = {
-      company,
-      website,
-      location,
-      status,
-      skills,
-      githubUsername,
-      bio,
-      twitter,
-      facebook,
-      linkedIn,
-      youtube,
-      instagram
+
+    if (company === '' || location === '' || status === '' || skills === '') {
+      setAlert('Please fill all required fields', 'fail');
+    } else {
+      const newProfile = {
+        company,
+        website,
+        location,
+        status,
+        skills,
+        githubUsername,
+        bio,
+        twitter,
+        facebook,
+        linkedIn,
+        youtube,
+        instagram
+      };
+      createProfile(newProfile);
     }
-    createProfile(newProfile)
   };
 
   return (
@@ -112,10 +118,8 @@ const CreateProfile = props => {
           </div>
 
           <div className='input-field col s6'>
-            <select value={status} onChange={handleChange} name='status' >
-              <option value='disabled'>
-                Select
-              </option>
+            <select value={status} onChange={handleChange} name='status'>
+              <option value='disabled'>Select</option>
               <option value='Sr. Developer'>Sr. Developer</option>
               <option value='Jr. Developer'>Jr. Developer</option>
               <option value='Student'>Student</option>
@@ -239,16 +243,21 @@ const CreateProfile = props => {
 
         <button
           type='submit'
-          className='waves-effect waves-light btn btn-mrtop teal text-white lighten-2'
+          className='waves-effect waves-light btn mr teal text-white lighten-2'
         >
           Submit
           <i className='material-icons right'>send</i>
         </button>
 
-        <Link to='/dashboard' className='btn grey'>Back</Link>
+        <Link to='/dashboard' className='btn grey'>
+          Back
+        </Link>
       </form>
     </div>
   );
 };
 
-export default connect(null,{createProfile})(CreateProfile);
+export default connect(
+  null,
+  { createProfile, setAlert }
+)(CreateProfile);
