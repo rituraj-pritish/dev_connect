@@ -34,7 +34,7 @@ const Post = ({ clearPost, getPost, loading, post, match }) => {
             {avatar ? (
               <img src={avatar} alt={name} className='circle' />
             ) : (
-              <Avatar name={name} round='50%' />
+              <Avatar className='teal' name={name} round='50%' />
             )}
           </Link>
 

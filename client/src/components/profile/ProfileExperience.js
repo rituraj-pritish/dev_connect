@@ -13,6 +13,7 @@ const ProfileExperience = ({
       <br />
       <span className='bold'>Position: </span>
       {title}
+      <br/>
       {description && (
         <span>
           <span className='bold'>Description: </span>

@@ -66,7 +66,7 @@ const CreateProfile = props => {
   };
 
   return (
-    <div>
+    <div className='card-panel'>
       <h4 className='teal-text'>Create Your Profile</h4>
       <p className='grey-text'>* - required fields</p>
 

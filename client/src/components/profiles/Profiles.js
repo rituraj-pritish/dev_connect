@@ -15,13 +15,13 @@ const Profiles = ({
     getProfiles();
   }, [getProfiles, clearProfile]);
 
-  const render = profiles.map(profile => (
-    <ProfileItem key={profile._id} profile={profile} />
-  ));
-
   if (loading) {
     return <Loader />;
   }
+  
+  const render = profiles.map(profile => (
+    <ProfileItem key={profile._id} profile={profile} />
+  ));
 
   return (
     <div className='card-panel'>
