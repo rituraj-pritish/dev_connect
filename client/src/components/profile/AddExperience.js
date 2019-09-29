@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addExperience } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 
-const AddExperience = ({addExperience}) => {
+const AddExperience = ({ addExperience }) => {
   const [formData, setFormData] = useState({
     company: '',
     title: '',
@@ -32,11 +32,11 @@ const AddExperience = ({addExperience}) => {
       description
     };
 
-    addExperience(newExp)
+    addExperience(newExp);
   };
 
   return (
-    <div>
+    <div className='card-panel'>
       <h4 className='teal-text'>Add Experience</h4>
       <p className='grey-text'>* - required fields</p>
 
@@ -63,7 +63,9 @@ const AddExperience = ({addExperience}) => {
               value={title}
               onChange={handleChange}
             />
-            <label htmlFor='title'><span className='red-text'>*</span>Title</label>
+            <label htmlFor='title'>
+              <span className='red-text'>*</span>Title
+            </label>
           </div>
         </div>
 
@@ -109,8 +111,6 @@ const AddExperience = ({addExperience}) => {
           </div>
         </div>
 
-        
-
         <div className='row'>
           <div className='input-field col s11'>
             <input
@@ -126,7 +126,7 @@ const AddExperience = ({addExperience}) => {
 
         <button
           type='submit'
-          className='waves-effect waves-light btn btn-mrtop teal text-white lighten-2'
+          className='waves-effect waves-light btn mr teal text-white lighten-2'
         >
           Submit
           <i className='material-icons right'>send</i>
@@ -140,4 +140,7 @@ const AddExperience = ({addExperience}) => {
   );
 };
 
-export default connect(null,{addExperience})(AddExperience);
+export default connect(
+  null,
+  { addExperience }
+)(AddExperience);

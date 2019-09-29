@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-import { getCurrentProfile,createProfile } from '../../actions/profile';
+import { getCurrentProfile, createProfile } from '../../actions/profile';
 
 const EditProfile = props => {
   const { loading, profile, createProfile, getCurrentProfile } = props;
@@ -50,11 +50,14 @@ const EditProfile = props => {
       githubUsername:
         loading || !profile.githubUsername ? '' : profile.githubUsername,
       bio: loading || !profile.bio ? '' : profile.bio,
-      twitter: loading || !profile.twitter ? '' : profile.social.twitter,
-      facebook: loading || !profile.facebook ? '' : profile.social.facebook,
-      linkedIn: loading || !profile.linkedIn ? '' : profile.social.linkedIn,
-      youtube: loading || !profile.youtube ? '' : profile.social.youtube,
-      instagram: loading || !profile.instagram ? '' : profile.social.instagram
+      twitter: loading || !profile.social.twitter ? '' : profile.social.twitter,
+      facebook:
+        loading || !profile.social.facebook ? '' : profile.social.facebook,
+      linkedIn:
+        loading || !profile.social.linkedIn ? '' : profile.social.linkedIn,
+      youtube: loading || !profile.social.youtube ? '' : profile.social.youtube,
+      instagram:
+        loading || !profile.social.instagram ? '' : profile.social.instagram
     });
 
     M.AutoInit();
@@ -81,11 +84,13 @@ const EditProfile = props => {
       youtube,
       instagram
     };
-    createProfile(newProfile,true);
+    createProfile(newProfile, true);
   };
 
+  console.log(status);
+
   return (
-    <div>
+    <div className='card-panel'>
       <h4 className='teal-text'>Edit Profile</h4>
       <p className='grey-text'>* - required fields</p>
 
@@ -112,7 +117,9 @@ const EditProfile = props => {
               value={website}
               onChange={handleChange}
             />
-            <label className={website && 'active'} htmlFor='website'>Website</label>
+            <label className={website && 'active'} htmlFor='website'>
+              Website
+            </label>
           </div>
         </div>
 
@@ -131,10 +138,8 @@ const EditProfile = props => {
           </div>
 
           <div className='input-field col s6'>
-          <select value={status} onChange={handleChange} name='status' >
-          <option value='disabled'>
-            Select
-          </option>
+            <select value={status} onChange={handleChange} name='status'>
+              <option value='disabled'>Select</option>
               <option value='Sr. Developer'>Sr. Developer</option>
               <option value='Jr. Developer'>Jr. Developer</option>
               <option value='Student'>Student</option>
@@ -169,7 +174,9 @@ const EditProfile = props => {
               value={bio}
               onChange={handleChange}
             />
-            <label className={bio && 'active'} htmlFor='bio'>Bio</label>
+            <label className={bio && 'active'} htmlFor='bio'>
+              Bio
+            </label>
           </div>
         </div>
 
@@ -182,7 +189,10 @@ const EditProfile = props => {
               value={githubUsername}
               onChange={handleChange}
             />
-            <label className={githubUsername && 'active'} htmlFor='githubUsername'>
+            <label
+              className={githubUsername && 'active'}
+              htmlFor='githubUsername'
+            >
               <i className='fab fa-github' /> Github Username
             </label>
             <span className='helper-text'>Adding Github Repos</span>
@@ -258,13 +268,15 @@ const EditProfile = props => {
 
         <button
           type='submit'
-          className='waves-effect waves-light btn btn-mrtop teal text-white lighten-2'
+          className='waves-effect waves-light btn teal mr text-white lighten-2'
         >
           Submit
           <i className='material-icons right'>send</i>
         </button>
 
-        <Link to='/dashboard' className='btn grey'>Back</Link>
+        <Link to='/dashboard' className='btn grey'>
+          Back
+        </Link>
       </form>
     </div>
   );
@@ -277,5 +289,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile,createProfile }
+  { getCurrentProfile, createProfile }
 )(EditProfile);

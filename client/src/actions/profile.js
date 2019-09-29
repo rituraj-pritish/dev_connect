@@ -20,6 +20,8 @@ export const getCurrentProfile = () => async dispatch => {
       payload: res.data
     });
   } catch (err) {
+    console.log('called');
+
     dispatch({
       type: PROFILE_ERROR,
       payload: err.response.statusText
@@ -51,7 +53,9 @@ export const getProfileById = userId => async dispatch => {
       payload: res.data
     });
   } catch (err) {
-
+    if (err.response.statusText === 'Unauthorized') {
+      dispatch(setAlert('You have to log in first', 'fail'));
+    }
     dispatch({
       type: PROFILE_ERROR,
       payload: err.response.statusText
@@ -95,7 +99,7 @@ export const createProfile = (data, edit = false) => async dispatch => {
 
 export const clearProfile = () => ({
   type: CLEAR_PROFILE
-})
+});
 
 export const addExperience = data => async dispatch => {
   try {

@@ -18,10 +18,6 @@ const Dashboard = props => {
     getCurrentProfile();
   }, [getCurrentProfile]);
 
-  useEffect(() => {
-    M.AutoInit();
-  });
-
   const noProfile = (
     <p>
       You have not setup a profile yet, please create one here <br />
@@ -43,7 +39,7 @@ const Dashboard = props => {
     return <Redirect to='/login' />;
   }
 
-  if (auth.loading || profile.loading || auth.user.user === null) {
+  if (auth.loading || profile.loading || auth.user === null) {
     return <Loader />;
   }
 
@@ -52,7 +48,7 @@ const Dashboard = props => {
   };
 
   return (
-    <div className='card-panel' >
+    <div className='card-panel'>
       <AccountDeleteModal handleDelete={handleDelete} />
       <h4 className='teal-text'>Dashboard</h4>
       <h5>Welcome {auth.user.user.name}</h5>

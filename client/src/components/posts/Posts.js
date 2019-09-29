@@ -17,7 +17,7 @@ const Posts = ({ getPosts, clearPost, post: { posts, loading } }) => {
   }
 
   return (
-    <div>
+    <div className='card-panel'>
       <h4 className='teal-text'>Posts</h4>
       <CreatePost />
       <ul className='collection'>

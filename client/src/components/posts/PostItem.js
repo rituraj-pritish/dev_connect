@@ -27,8 +27,11 @@ const PostItem = ({
   };
 
   return (
-    <Fragment>
-      <li className='collection-item row'>
+    <div>
+      <li
+        style={{ background: '#ebf0f2', marginTop: '5px' }}
+        className='collection-item row'
+      >
         <div className='col s3 post-left-content'>
           <Link to='#'>
             {avatar ? (
@@ -65,7 +68,7 @@ const PostItem = ({
           </div>
         </div>
       </li>
-    </Fragment>
+    </div>
   );
 };
 

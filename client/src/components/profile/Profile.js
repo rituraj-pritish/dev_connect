@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import Loader from '../layout/Loader';
 import { getProfileById } from '../../actions/profile.js';
@@ -19,6 +19,10 @@ const Profile = ({
   useEffect(() => {
     getProfileById(match.params.id);
   }, [getProfileById, match.params.id]);
+
+  if (!auth.isAuthenticated) {
+    return <Redirect to='/login' />;
+  }
 
   if (loading || profile === null) {
     return <Loader />;

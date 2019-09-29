@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addEducation } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 
-const AddEducation = ({addEducation}) => {
+const AddEducation = ({ addEducation }) => {
   const [formData, setFormData] = useState({
     school: '',
     fieldOfStudy: '',
@@ -32,11 +32,11 @@ const AddEducation = ({addEducation}) => {
       description
     };
 
-    addEducation(newEdu)
+    addEducation(newEdu);
   };
 
   return (
-    <div>
+    <div className='card-panel'>
       <h4 className='teal-text'>Add Education</h4>
       <p className='grey-text'>* - required fields</p>
 
@@ -63,7 +63,9 @@ const AddEducation = ({addEducation}) => {
               value={fieldOfStudy}
               onChange={handleChange}
             />
-            <label htmlFor='fieldOfStudy'><span className='red-text'>*</span>Field Of Study</label>
+            <label htmlFor='fieldOfStudy'>
+              <span className='red-text'>*</span>Field Of Study
+            </label>
           </div>
         </div>
 
@@ -109,8 +111,6 @@ const AddEducation = ({addEducation}) => {
           </div>
         </div>
 
-        
-
         <div className='row'>
           <div className='input-field col s11'>
             <input
@@ -126,7 +126,7 @@ const AddEducation = ({addEducation}) => {
 
         <button
           type='submit'
-          className='waves-effect waves-light btn teal btn-mrtop text-white lighten-2'
+          className='waves-effect waves-light btn teal mr text-white lighten-2'
         >
           Submit
           <i className='material-icons right'>send</i>
@@ -140,4 +140,7 @@ const AddEducation = ({addEducation}) => {
   );
 };
 
-export default connect(null,{addEducation})(AddEducation);
+export default connect(
+  null,
+  { addEducation }
+)(AddEducation);
